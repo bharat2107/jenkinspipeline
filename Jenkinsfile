@@ -13,8 +13,33 @@ pipeline {
             }
         }
          stage ('Deploy to Staging'){
-            steps {
-                build job: 'deploy-to-staging'
+            steps{
+                timeout(time:2, unit:'DAYS'){
+                    input message:'Approve Deployment?'
+                }
+
+                build job: 'Deploy-to-Staging'
+            }
+            post {
+                success {
+                    echo 'Code deployed to Staging.'
+                }
+
+                failure {
+                    echo ' Deployment failed on Staging'
+        
+                }
+   
+            }
+         }
+         stage ('Continuous Inspection'){
+          steps{
+                build job: 'Continuous Inspection(SonarQube)'
+            }
+            post {
+                success {
+                    echo 'Inspection....'
+                }  
             }
         }
     }
