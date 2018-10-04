@@ -34,7 +34,7 @@ pipeline {
          }
          stage ('Continuous Inspection'){
           steps{
-                build job: 'Continuous Inspection(SonarQube)'
+                build job: 'Continuous Inspection'
             }
             post {
                 success {
