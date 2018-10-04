@@ -14,8 +14,8 @@ pipeline {
         }
          stage ('Deploy to Staging'){
             steps{
-                timeout(time:2, unit:'DAYS'){
-                    input message:'Approve Deployment?'
+                timeout(time:1, unit:'DAYS'){
+                    input message:'Approve Deployment for Staging?'
                 }
 
                 build job: 'Deploy-to-Staging'
